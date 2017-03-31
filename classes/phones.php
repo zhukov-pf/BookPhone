@@ -106,4 +106,52 @@ class Phones {
 
 	}
 
+	function sortCompany() {
+
+		if(isset($_GET['company'])) {
+
+			if($_GET['company'] == 1) {
+				$name = "Офис";
+			}
+			if($_GET['company'] == 2) {
+				$name = "Пицца Фабрика";	
+			}
+			if($_GET['company'] == 3) {
+				$name = "Птицы и Пчёлы";
+			}
+
+			printf('<thead>');
+					printf('<tr>');
+					printf('<th><lavel>#</label></th>');
+					printf('<th><label>Фамилия</label></th>');
+					printf('<th><label>Имя</label></th>');
+					printf('<th><label>Отчество</label></th>');
+					printf('<th><label>Компания</label></th>');
+					printf('<th><label>Отдел</label></th>');
+					printf('<th><label>Должность</label></th>');
+					printf('<th><label>Телефон</label></th>');
+					printf('</tr>');
+					printf('</thead>');
+					printf('<tbody>');
+
+					$quety = mysql_query("SELECT * FROM contacts WHERE company='$name'");
+
+					while ($row = mysql_fetch_object($quety)) {
+						printf('<tr>');
+						printf('<td>'.$row->id.'</td>');
+						printf('<td>'.$row->surname.'</td>');
+						printf('<td>'.$row->name.'</td>');
+						printf('<td>'.$row->patronymic.'</td>');
+						printf('<td>'.$row->company.'</td>');
+						printf('<td>'.$row->deportaments.'</td>');
+						printf('<td>'.$row->position.'</td>');
+						printf('<td>'.$row->number.'</td>');
+						printf('</tr>');
+					}
+
+					printf('</tbody>');
+		}
+
+	}
+
 }

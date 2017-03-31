@@ -3,6 +3,8 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/classes/phones.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/classes/formFunction.php');
 
+new Updater();
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -49,6 +51,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/classes/formFunction.php');
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Главная</a></li>
+            <li><a href="?company=1">Офис</a></li>
+            <li><a href="?company=2">Пицца Фабоика</a></li>
+            <li><a href="?company=3">Птицы и Пчёлы</a></li>
             <li><?php Phones::addMenu(); ?></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -61,7 +66,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/classes/formFunction.php');
             <?php formFunction::delPhone(); formFunction::editActionPhone(); ?>
             <form method="post">
                 <table cellpadding="0" cellspacing="0" border="0" id="table" class="sortable">
-                    <?php new Phones(); ?>
+                    <?php 
+
+                      if(!isset($_GET['company'])) {
+                        new Phones();
+                      }
+                      else {
+                        Phones::sortCompany();                        
+                      }
+
+                    ?>
                 </table>
             </form>
             <div id="controls">
